@@ -31,4 +31,6 @@ cd "$WORK_DIR" || exit 1
 
 echo "Starting Dendrite server..."
 # Run the app binary (absolute path) with the local config in /tmp
-exec "$APP_BIN" --config dendrite.yaml
+# Added --skip-db-sanity because Leapcell/Neon connection pooling often reports 
+# max_connections values that confuse Dendrite's safety checks.
+exec "$APP_BIN" --config dendrite.yaml --skip-db-sanity
